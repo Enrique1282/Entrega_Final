@@ -1,0 +1,19 @@
+{% extends "Appfinal/index.html" %}
+{% load static %}
+
+{% block section1 %}
+
+<body>
+    <div class="alert alert-dark" role="alert" style="text-align: center;">
+    <h2 >Detalles del Estilo</h2>
+    <p>estilo: {{ estilo.nombre }}</p>
+    <p>Color: {{ estilo.color }}</p>
+    <p>Amargor: {{ estilo.amargor }}</p>
+    <p>Descripcion: {{ estilo.descripcion }}</p>
+
+    <a href="{% url 'VerBD' %}">Regresar</a>
+    </div>
+</body>
+
+
+{% endblock %}

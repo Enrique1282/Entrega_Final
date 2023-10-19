@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import "./styless.css";
 /*!
 * Start Bootstrap - Blog Post v5.0.9 (https://startbootstrap.com/template/blog-post)
 * Copyright 2013-2023 Start Bootstrap
@@ -616,7 +617,7 @@ progress {
 }
 
 .figure-img {
-  margin-bottom: 0.5rem;
+  margin-bottom: 2;
   line-height: 1;
 }
 
@@ -632,13 +633,13 @@ progress {
 .container-lg,
 .container-md,
 .container-sm {
-  --bs-gutter-x: 1.5rem;
+  --bs-gutter-x: 0;
   --bs-gutter-y: 0;
   width: 100%;
-  padding-right: calc(var(--bs-gutter-x) * 0.5);
-  padding-left: calc(var(--bs-gutter-x) * 0.5);
-  margin-right: auto;
-  margin-left: auto;
+  padding-right: var(--bs-gutter-x);
+  padding-left: var(--bs-gutter-x);
+  margin: 0;
+
 }
 
 @media (min-width: 576px) {

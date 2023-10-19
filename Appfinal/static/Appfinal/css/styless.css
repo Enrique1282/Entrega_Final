@@ -1,0 +1,35 @@
+/* styles.css */
+
+/* Estilo para el formulario de registro */
+#registro-form {
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  margin: 0 auto;
+}
+
+/* Estilo para los campos del formulario */
+#registro-form input[type="text"],
+#registro-form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Estilo para el botón de registro */
+#registro-form input[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Estilo para el mensaje de error */
+.error-message {
+  color: #f00;
+}

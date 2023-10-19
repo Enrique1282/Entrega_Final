@@ -1,0 +1,28 @@
+{% extends "Appfinal/index.html" %}
+{% load static %}
+
+{% block section1 %}
+
+
+<h1>Lista de Reseñas de Cerveza</h1>
+<div class="row">
+    {% for resena in resenas %}
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <img src="{% static 'Appfinal\imagenes\sirviendo.jpg'%}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ resena.titulo }} - {{ resena.cerveceria }}</h5>
+                <h6 class="card-text">{{ resena.estilo }}</h6>
+                <p class="card-text">{{ resena.contenido }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<style>
+    body {
+            background-color: #dac9c9;
+        }
+</style>
+
+{% endblock %}

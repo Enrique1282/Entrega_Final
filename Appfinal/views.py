@@ -1,11 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from .models import Estilos, Ingredientes, User, Imagen
-from .forms import (BuscaEstilo, EstiloFormulario, UserRegisterform, UserEditForm,
-                    MyUserEditForm)
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth import login, logout, authenticate
+from .models import Estilos, Ingredientes, User, Imagen, ResenaCerveza
+from .forms import (BuscaEstilo, EstiloFormulario, MyUserEditForm,
+                     FormularioResenaCerveza, UserRegisterform)
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
+from .models import Categoria, Tema, Mensaje
+from .forms import NuevoMensajeForm,CategoriaForm
+
 
 
 def inicio(request):
@@ -24,12 +26,13 @@ def cargar_estilo(request):
 
     return render(request, "Appfinal/cargar_estilo.html")
 
+
 def cargar_ingredientes(request):
 
     if request.method == 'POST':
         ingredientes = Ingredientes(estilo=request.POST['estilo'],
                       malta=request.POST['malta'], lupulo=request.POST['lupulo'],
-                      levadura=request.POST['levadura'])
+                      levadura=request.POST['levadura'], descripcion=request.POST['descripcion'])
         ingredientes.save()
 
         return render(request, "Appfinal/index.html")
@@ -91,7 +94,7 @@ def delete_estilo(request, estilo_id):
 def edit_estilo(request, estilo_id):
     if request.method == "POST":
         # Aqui me llega la informacion del html
-        miFormulario = EstiloFormulario(request.POST)
+        miFormulario = EstiloFormulario(request.POST, request.FILES)
 
         if miFormulario.is_valid():
             informacion = miFormulario.cleaned_data
@@ -118,10 +121,8 @@ def receta_blonde(request):
 def receta_ipa(request):
     return render(request, "Appfinal/receta_ipa.html")
 
-
 def receta_porter(request):
     return render(request, "Appfinal/receta_porter.html")
-
 
 def login_request(request):
     if request.method == "POST":
@@ -138,14 +139,14 @@ def login_request(request):
                 return render(request, "Appfinal/index.html", {"mensaje": f"Bienvenido {usuario}"})
             else:
                 form = AuthenticationForm()
-                return render(request, "Appfinal/login.html", {"mensaje": "Error, datos incorrectos", "form": form})
+                return render(request, "Appfinal/login2.html", {"mensaje": "Error, datos incorrectos", "form": form})
 
         else:
             return render(request, "Appfinal/index.html", {"mensaje": "Error, formulario erroneo"})
 
     form = AuthenticationForm()
 
-    return render(request, "Appfinal/login.html", {"form": form})
+    return render(request, "Appfinal/login2.html", {"form": form})
 
 def registrarse(request):
     if request.method == "POST":
@@ -155,13 +156,12 @@ def registrarse(request):
         if form.is_valid():
             username = form.cleaned_data["username"]
             form.save()
-            return render(request, "Appfinal/index.html", {"mensaje": f"{username} Usuario Creado ;)"})
+            return render(request, "Appfinal/index.html", {"mensaje": f"{username} ¡Registro exitoso!"})
     else:
         # form = UserCreationForm()
         form = UserRegisterform(request.POST)
 
-    return render(request, "Appfinal/registro.html", {"form": form})
-
+    return render(request, "Appfinal/register2.html", {"form": form})
 
 def editarPerfil(request):
 
@@ -210,7 +210,84 @@ def editarPerfil(request):
                 'first_name': usuario.first_name
             }
         )
-    return render(request, "Appfinal/editarPerfil.html", {"miFormulario": miFormulario,
+    return render(request, "Appfinal/editarPerfil_2.html", {"miFormulario": miFormulario,
                                                       "usuario": usuario
                                                       }
                   )
+
+def ver_estilo(request, estilo_id):
+    estilo =Estilos.objects.get(id=estilo_id)
+    return render(request, 'Appfinal/ver_estilo.html', {'estilo': estilo})
+
+def agregar_resena_cerveza(request):
+    if request.method == 'POST':
+        form = FormularioResenaCerveza(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, "Appfinal/index.html")
+    else:
+        form = FormularioResenaCerveza()
+    
+    return render(request, 'Appfinal/agregar_resena_cerveza.html', {'form': form})
+
+def listar_resenas(request):
+    resenas = ResenaCerveza.objects.all()  # Recupera todas las reseñas de la base de datos
+    return render(request, 'Appfinal/listar_resenas.html', {'resenas': resenas})
+
+
+
+
+
+def lista_categorias(request):
+    categorias = Categoria.objects.all()
+    return render(request, 'Appfinal/lista_categorias.html', {'categorias': categorias})
+
+def lista_temas(request, categoria_id):
+    temas = Tema.objects.filter(categoria__id=categoria_id)
+    return render(request, 'Appfinal/lista_temas.html', {'temas': temas})
+
+def ver_tema(request, tema_id):
+   
+    tema = Tema.objects.get(pk=tema_id)
+    mensajes = Mensaje.objects.filter(tema=tema)
+    
+    if request.method == 'POST':
+        form = NuevoMensajeForm(request.POST)
+        if form.is_valid():
+            nuevo_mensaje = form.save(commit=False)
+            nuevo_mensaje.tema = tema
+            nuevo_mensaje.autor = request.user  # Asumiendo que estás utilizando autenticación de usuarios.
+            nuevo_mensaje.save()
+            return render(request, "Appfinal/index.html")
+    else:
+        form = NuevoMensajeForm()
+
+    return render(request, 'Appfinal/ver_tema.html', {'tema': tema, 'mensajes': mensajes, 'form': form})
+
+
+def agregar_categoria(request):
+    if request.method == 'POST':
+        form = CategoriaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, "Appfinal/index.html")
+    else:
+        form = CategoriaForm()
+    return render(request, 'Appfinal/agregar_categoria.html', {'form': form})
+
+
+
+def agregar_mensaje(request, tema_id):
+    tema = Tema.objects.get(pk=tema_id)
+
+    if request.method == 'POST':
+        form = NuevoMensajeForm(request.POST)
+        if form.is_valid():
+            mensaje = form.save(commit=False)
+            mensaje.tema = tema
+            mensaje.save()
+            return render(request, "Appfinal/index.html")
+    else:
+        form = NuevoMensajeForm()
+
+    return render(request, 'Appfinal/agregar_mensaje.html', {'form': form, 'tema': tema})

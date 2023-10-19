@@ -2,25 +2,13 @@
 {% load static %}
 
 {% block section1 %}
-<img src="{% static 'Appfinal\imagenes\estilos.jpg'%}" alt="Estilos ">
-<h1>Cargar Estilo</h1>
+
+
 <head>
-<body>
-    <div id="registro-form">
-        <form action="" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <p>Nombre: <input type="text" name="nombre"></p>
-            <p>Color: <input type="text" name="color"></p>
-            <p>Amargor: <input type="text" name="amargor"></p>
-            <p>Descripción: <textarea name="descripcion"></textarea></p>
-            <div style="text-align:center;">
-               <input type="submit" value="Enviar">
-            </div>
-        </form>
-    </div>
+    <title>Agregar Reseña de Cerveza</title>
     <style>
         #registro-form {
-            background: linear-gradient(135deg, #2dbfdc, #7f7b97);
+            background: linear-gradient(135deg, #428630, #479dc5);
             padding: 35px;
             border-radius: 50px;
             width: 300px;
@@ -39,19 +27,21 @@
         }
         
         /* Estilo para el campo de descripcion */
-        #registro-form textarea[name="descripcion"] {
+        #registro-form textarea[name="contenido"] {
             width: 100%;
+            height: 100px;
             padding: 10px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            resize: vertical;
         }
         
         /* Estilo para el botón de registro */
         #registro-form input[type="submit"] {
             background-color: #007bff;
             color: #fff;
-            padding: 20px;
+            padding: 15px;
             border: none;
             border-radius: 15px;
             cursor: pointer;
@@ -62,11 +52,19 @@
             color: #f00;
         }
         body {
-            background-color: #c1b9b9;
+            background-color: #dac9c9;
         }
     </style>
-</body>
 </head>
-
+<body>
+    <h1>Agregar Reseña de Cerveza</h1>
+    <form method="post" id="registro-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div style="text-align:center;">
+           <input type="submit" value="Guardar Reseña">
+        </div>
+    </form>
+</body>
 
 {% endblock %}

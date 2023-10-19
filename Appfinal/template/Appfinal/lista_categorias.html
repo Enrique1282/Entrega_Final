@@ -1,0 +1,11 @@
+{% extends "Appfinal/index.html" %}
+{% load static %}
+
+{% block section3 %}
+
+{% for categoria in categorias %}
+<li>Nombre: {{ categoria.nombre }} </li>
+
+{% endfor %}
+
+{% endblock %}

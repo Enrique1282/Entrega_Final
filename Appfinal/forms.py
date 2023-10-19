@@ -1,6 +1,9 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from .models import ResenaCerveza
+from .models import Tema, Mensaje, Categoria
+
 
 class BuscaEstilo(forms.Form):
     estilo = forms.CharField()
@@ -44,7 +47,6 @@ class UserEditForm(UserCreationForm):
 class AvatarFormulario(forms.Form):
 
     # Especificar los campos
-
     imagen = forms.ImageField(required=True)
 
 class MyUserEditForm(UserCreationForm):
@@ -64,3 +66,25 @@ class MyUserEditForm(UserCreationForm):
         model = User
         fields = ['email', 'last_name', 'first_name',
                   'password1', 'password2', 'avatar']
+        
+
+class FormularioResenaCerveza(forms.ModelForm):
+    class Meta:
+        model = ResenaCerveza
+        fields = ['titulo', 'cerveceria', 'estilo', 'contenido', 'calificacion']
+
+
+class NuevoTemaForm(forms.ModelForm):
+    class Meta:
+        model = Tema
+        fields = ['titulo', 'contenido']
+
+class NuevoMensajeForm(forms.ModelForm):
+    class Meta:
+        model = Mensaje
+        fields = ['contenido']
+
+class CategoriaForm(forms.ModelForm):
+    class Meta:
+        model = Categoria
+        fields = ['nombre']

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <div style="text-align: center;">
+        <h2>Ingrese sus Datos</h2>
+      </div>
+      
+    <style>
+        
+        #registro-form {
+            background: linear-gradient(135deg, #9e93e3, #6d5bd7);
+            padding: 35px;
+            border-radius: 50px;
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        /* Estilo para los campos del formulario */
+        #registro-form input[type="text"],
+        #registro-form input[type="email"],
+        #registro-form input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Estilo para el botón de registro */
+        #registro-form input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+        /* Estilo para el mensaje de error */
+        .error-message {
+            color: #f00;
+        }
+    </style>
+</head>
+<body>
+    <form id="registro-form" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Registrar">
+    </form>
+
+    <!-- Mensajes de error -->
+    <div class="error-message">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+</body>
+
+</html>
+
+

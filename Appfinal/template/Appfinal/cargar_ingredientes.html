@@ -5,18 +5,67 @@
 
 <img src="{% static 'Appfinal\imagenes\ingredientes.jpg'%}" alt="Estilos ">
 <h1>Cargar Ingredientes</h1>
-<body>
+<style>
+    #registro-form {
+        background: linear-gradient(135deg, #d7a22e, #d83731);
+        padding: 35px;
+        border-radius: 50px;
+        width: 300px;
+        margin: 0 auto;
+    }
 
-    <form action="" method="POST">
-        {% csrf_token %}
-        <p>Estilo: <input type="text" name="estilo"></p>
-        <p>Malta: <input type="text" name="malta"></p>
-        <p>Lupulo: <input type="text" name="lupulo"></p>
-        <p>Levadura: <input type="text" name="levadura"></p>
+    /* Estilo para los campos del formulario */
+    #registro-form input[type="text"],
+    #registro-form input[type="email"],
+    #registro-form input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    
+    /* Estilo para el campo de descripcion */
+#registro-form textarea[name="descripcion"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
 
+    /* Estilo para el botón de registro */
+    #registro-form input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        padding: 15px;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+    }
+
+    /* Estilo para el mensaje de error */
+    .error-message {
+        color: #f00;
+    }
+    body {
+            background-color: #c1b9b9;
+        }
+</style>
+
+<form id="registro-form" action="" method="POST">
+    {% csrf_token %}
+    <p>Malta: <input type="text" name="malta"></p>
+    <p>Lupulo: <input type="text" name="lupulo"></p>
+    <p>Levadura: <input type="text" name="levadura"></p>
+    <p>Descripción: </p>
+    <textarea name="descripcion" rows="4" cols="50"></textarea>
+    <br>
+    <div style="text-align:center;">
         <input type="submit" value="Enviar">
+    </div>
+</form>
 
-    </form>
-</body>
+
 
 {% endblock %}

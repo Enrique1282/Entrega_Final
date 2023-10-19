@@ -4,23 +4,73 @@
 {% block section1 %}
 
 <h1>Todos los Estilos Cargados</h1>
-<ul>
-
+<ul class="card-list">
     {% for estilo in estilos %}
-        <img src="{% static 'Appfinal\imagenes\estilos.jpg'%}" class="card-img-top" alt="...">
-              <h5 class="card-title">{{ estilo.nombre }}</h5>
-              <p class="card-text">Color: {{ estilo.color }}</p>
-              <p class="card-text">Amargor: {{ estilo.amargor }}</p>
-              <h5 class="card-title"> Descripcion </h5>
-              <p class="card-text">{{ estilo.descripcion }}</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-          
-      <button>
-          <a onclick="return confirm('¿Estás seguro de que deseas eliminar el estilo?')" href="{% url 'DeleteEstilo' estilo.id %}">Eliminar</a>
-          <a href="{% url 'EditarEstilo' estilo.id %}">Editar</a>
-      </button>
-  {% endfor %}
-</ul>
-
-
+      <li class="card">
+        <img src="{% static 'Appfinal/imagenes/estilos.jpg' %}" class="card-img" alt="...">
+        <h5 class="card-title">{{ estilo.nombre }}</h5>
+        <p class="card-text">Color: {{ estilo.color }}</p>
+        <p class="card-text">Amargor: {{ estilo.amargor }}</p>
+        {% if perms.Appfinal.change_estilo %}
+          <a href="{% url 'EditarEstilo' estilo.id %}" class="btn-edit">Editar</a>
+        {% endif %}
+        {% if perms.Appfinal.delete_estilo %}
+          <a onclick="return confirm('¿Estás seguro de que deseas eliminar el estilo?')" href="{% url 'DeleteEstilo' estilo.id %}" class="btn-delete">Eliminar</a>
+        {% endif %}
+        <a href="{% url 'VerEstilo' estilo.id %}" class="btn-view">Ver</a>
+      </li>
+    {% endfor %}
+  </ul>
+  <style>
+    .card-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .card {
+      width: 200px;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+      text-align: center;
+    }
+    .card-img {
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+    }
+    .card-title {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+    .card-text {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+    .btn-edit,
+    .btn-delete,
+    .btn-view {
+      display: block;
+      margin-top: 10px;
+      padding: 5px 10px;
+      border-radius: 5px;
+      text-decoration: none;
+      color: #fff;
+      background-color: #0099ff;
+    }
+    .btn-edit {
+      background-color: #fed766;
+    }
+    .btn-delete {
+      background-color: #fc5185;
+    }
+    .btn-view {
+      background-color: #00c1d4;
+    }
+    body {
+            background-color: #c1b9b9;
+        }
+  </style>
+  
 {% endblock %}

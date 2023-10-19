@@ -1,0 +1,10 @@
+{% extends "Appfinal/index.html" %}
+{% load static %}
+
+{% block section3 %}
+
+{% for tema in temas %}
+  <li>Titulo: {{ tema.titulo }} - Contenido: {{tema.contenido}} </li>
+{% endfor %}
+
+{% endblock %}

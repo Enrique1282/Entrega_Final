@@ -1,0 +1,34 @@
+{% extends "Appfinal/index.html" %}
+{% load static %}
+
+{% block section3 %}
+
+<h1>{{ tema.titulo }}</h1>
+<body>
+
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-left: 10px;
+      background-color: khaki;
+    }
+    </style>
+{% for mensaje in mensajes %}
+<div class="alert alert-dark" role="alert">
+
+  <p>{{ forloop.counter }}. {{ mensaje.contenido }} </p>
+  <p>- Autor: {{ mensaje.autor}}/{{mensaje.fecha_creacion}}</p>
+{% endfor %}
+</div>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Enviar mensaje</button>
+</form>
+</body>
+
+
+{% endblock %}
