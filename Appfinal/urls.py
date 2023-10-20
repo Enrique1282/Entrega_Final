@@ -35,7 +35,7 @@ urlpatterns += [
     path('registrarse/', registrarse, name="Registrarse"),
     path('editarPerfil/', editarPerfil, name="EditarPerfil"),
     path('logout/', LogoutView.as_view(
-        template_name='Appfinal/logout.html'), name="Logout"),
+        template_name='Appfinal/nosotros.html'), name="Logout"),
 ]
 
 urlpatterns += [

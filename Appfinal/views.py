@@ -12,7 +12,7 @@ from .forms import NuevoMensajeForm,CategoriaForm
 
 def inicio(request):
    
-    return render(request, "Appfinal/index.html")
+    return render(request, "Appfinal/nosotros.html")
 
 def cargar_estilo(request):
 
@@ -142,7 +142,7 @@ def login_request(request):
                 return render(request, "Appfinal/login2.html", {"mensaje": "Error, datos incorrectos", "form": form})
 
         else:
-            return render(request, "Appfinal/index.html", {"mensaje": "Error, formulario erroneo"})
+            return render(request, "Appfinal/nosotros.html", {"mensaje": "Usuario o Contraseña incorrecta"})
 
     form = AuthenticationForm()
 
