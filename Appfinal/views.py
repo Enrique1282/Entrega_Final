@@ -14,6 +14,11 @@ def inicio(request):
    
     return render(request, "Appfinal/index2.html")
 
+def inicio2(request):
+   
+    return render(request, "Appfinal/index.html")
+
+@login_required
 def cargar_estilo(request):
 
     if request.method == 'POST':
@@ -26,6 +31,7 @@ def cargar_estilo(request):
 
     return render(request, "Appfinal/cargar_estilo.html")
 
+@login_required
 def cargar_ingredientes(request):
     if request.method == 'POST':
         estilo = request.POST.get('estilo', '')
@@ -51,6 +57,7 @@ def cargar_ingredientes(request):
 
     return render(request, "Appfinal/cargar_ingredientes.html")
 
+@login_required
 def listar_ingredientes(request):
 
     ingredientes = Ingredientes.objects.all()  # trae todos los cursos
@@ -92,6 +99,7 @@ def edit_ingrediente(request, ingrediente_id):
 
     return render(request, "Appfinal/editar_estilo.html", {"miFormulario": miFormulario})
 
+@login_required
 def buscar_estilo(request):
     if request.method == "POST":
         # Aqui me llega la informacion del html
@@ -100,33 +108,44 @@ def buscar_estilo(request):
         if miFormulario.is_valid():
             informacion = miFormulario.cleaned_data
 
-            estilo = Estilos.objects.filter(
+            estilos = Estilos.objects.filter(
                 nombre__icontains=informacion["estilo"])
 
-            return render(request, "Appfinal/lista.html", {"estilos": estilo})
+            if estilos:
+                return render(request, "Appfinal/lista.html", {"estilos": estilos})
+            else:
+                mensaje = "Estilo no encontrado"
+                return render(request, "Appfinal/lista.html", {"mensaje": mensaje})
     else:
         miFormulario = BuscaEstilo()
 
     return render(request, "Appfinal/ver_estilos.html", {"miFormulario": miFormulario})
 
+@login_required
 def ipa(request):
     return render(request, "Appfinal/ipa.html")
 
+@login_required
 def scotish(request):
     return render(request, "Appfinal/scotish.html")
 
+@login_required
 def golden(request):
     return render(request, "Appfinal/golden.html")
 
+@login_required
 def apa(request):
     return render(request, "Appfinal/apa.html")
 
+@login_required
 def blog(request):
     return render(request, "Appfinal/blog.html")
 
+@login_required
 def nosotros(request):
     return render(request, "Appfinal/nosotros.html")
 
+@login_required
 def ver_BD(request):
 
     estilos = Estilos.objects.all()  # trae todos los cursos
@@ -168,12 +187,15 @@ def edit_estilo(request, estilo_id):
 
     return render(request, "Appfinal/editar_estilo.html", {"miFormulario": miFormulario})
 
+@login_required
 def receta_blonde(request):
     return render(request, "Appfinal/receta_blonde.html")
 
+@login_required
 def receta_ipa(request):
     return render(request, "Appfinal/receta_ipa.html")
 
+@login_required
 def receta_porter(request):
     return render(request, "Appfinal/receta_porter.html")
 
@@ -216,6 +238,7 @@ def registrarse(request):
 
     return render(request, "Appfinal/register2.html", {"form": form})
 
+@login_required
 def editarPerfil(request):
 
     usuario = request.user
@@ -268,10 +291,12 @@ def editarPerfil(request):
                                                       }
                   )
 
+@login_required
 def ver_estilo(request, estilo_id):
     estilo =Estilos.objects.get(id=estilo_id)
     return render(request, 'Appfinal/ver_estilo.html', {'estilo': estilo})
 
+@login_required
 def agregar_resena_cerveza(request):
     if request.method == 'POST':
         form = FormularioResenaCerveza(request.POST)
@@ -283,9 +308,11 @@ def agregar_resena_cerveza(request):
     
     return render(request, 'Appfinal/agregar_resena_cerveza.html', {'form': form})
 
+@login_required
 def listar_resenas(request):
     resenas = ResenaCerveza.objects.all()  # Recupera todas las reseñas de la base de datos
     return render(request, 'Appfinal/listar_resenas.html', {'resenas': resenas})
+
 
 def delete_resena(request, resena_id):
 
@@ -321,14 +348,17 @@ def edit_resena(request, resena_id):
 
     return render(request, "Appfinal/editarResena.html", {"miFormulario": miFormulario})
 
+@login_required
 def lista_categorias(request):
     categorias = Categoria.objects.all()
     return render(request, 'Appfinal/lista_categorias.html', {'categorias': categorias})
 
+@login_required
 def lista_temas(request, categoria_id):
     temas = Tema.objects.filter(categoria__id=categoria_id)
     return render(request, 'Appfinal/lista_temas.html', {'temas': temas})
 
+@login_required
 def ver_tema(request, tema_id):
    
     tema = Tema.objects.get(pk=tema_id)

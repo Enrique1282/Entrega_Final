@@ -12,12 +12,22 @@
 
 <h1>Ver Estilos</h1>
 
-{% for estilo in estilos %}
-    <li>Nombre: {{ estilo.nombre }} </li>
-    <li>Color: {{ estilo.color }} </li>
-    <li>Amargor: {{ estilo.amargor }} </li>
-    <br>
+{% if estilos %}
 
-{% endfor %}
+    {% for estilo in estilos %}
+        <li>Nombre: {{ estilo.nombre }} </li>
+        <li>Color: {{ estilo.color }} </li>
+        <li>Amargor: {{ estilo.amargor }} </li>
+        <br>
+    {% endfor %}
+    <form action="{% url 'BuscarEstilo' %}" method="GET">
+      <button type="submit">Volver a buscar</button>
+    </form>
+{% else %}
+    <h3 style="font-family: Arial, sans-serif; color: red;">{{ mensaje }}</h3>
+    <form action="{% url 'BuscarEstilo' %}" method="GET">
+      <button type="submit">Volver a buscar</button>
+    </form>
+{% endif %}
 
 {% endblock %}

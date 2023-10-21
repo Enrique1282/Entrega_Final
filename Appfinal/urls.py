@@ -4,7 +4,8 @@ from Appfinal.views import (inicio, cargar_estilo, cargar_ingredientes, buscar_e
                             blog, nosotros, receta_blonde, receta_ipa, receta_porter, login_request,
                             registrarse, editarPerfil, ver_estilo, agregar_resena_cerveza,
                             listar_resenas, lista_categorias,lista_temas,ver_tema, delete_resena, 
-                            edit_resena, listar_ingredientes, delete_ingrediente, edit_ingrediente
+                            edit_resena, listar_ingredientes, delete_ingrediente, edit_ingrediente,
+                            inicio2
                             )
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import views as auth_views
@@ -13,6 +14,7 @@ from . import views
 
 urlpatterns = [
     path('inicio/',  inicio, name="Inicio"),
+    path('inicio2/',  inicio2, name="Inicio2"),
     path('cargarEstilo/', cargar_estilo, name="CargarEstilo" ),
     path('cargarIngredientes/', cargar_ingredientes, name="CargarIngredientes" ),
     path('listarIngredientes/', listar_ingredientes, name="ListarIngredientes" ),
