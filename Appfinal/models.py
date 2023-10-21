@@ -14,11 +14,11 @@ class Estilos(models.Model):
     
 
 class Ingredientes(models.Model):
-    estilo = models.CharField(max_length=40, blank=True, null=True)
-    malta = models.CharField(max_length=40)
-    lupulo = models.CharField(max_length=40)
-    levadura = models.CharField(max_length=40)
-    descripcion = models.TextField(max_length=200)
+    estilo = models.CharField(max_length=40, blank=True)
+    malta = models.CharField(max_length=40, blank=True)
+    lupulo = models.CharField(max_length=40, blank=True)
+    levadura = models.CharField(max_length=40, blank=True)
+    descripcion = models.TextField(max_length=200, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)  
     upload_time = models.DateTimeField(auto_now_add=True)  
 

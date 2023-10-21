@@ -33,7 +33,7 @@ def cargar_ingredientes(request):
         lupulo = request.POST.get('lupulo', '')
         levadura = request.POST.get('levadura', '')
         descripcion = request.POST.get('descripcion', '')
-
+       
         ingredientes = Ingredientes(
             estilo=estilo,
             malta=malta,
@@ -41,6 +41,10 @@ def cargar_ingredientes(request):
             levadura=levadura,
             descripcion=descripcion
         )
+        if request.user.is_authenticated:
+            ingredientes.author = request.user
+        else:
+            ingredientes.author = None
         ingredientes.save()
 
         return render(request, "Appfinal/index.html")

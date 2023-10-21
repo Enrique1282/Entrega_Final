@@ -32,6 +32,10 @@
             main {
                flex: 1;
             }
+            .navbar .nav-item {
+                margin-right: 5px; /* Ajusta el valor del margen según tus necesidades */
+            }
+            
         </style>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -49,11 +53,11 @@
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="width: 100%;">
             <div class="container-fluid justify-content-center" style="margin-left: 10px;">
-                <a class="navbar-brand" href="{% url 'Inicio' %}" style="margin-left: 5px;">Home</a>
+                <a class="navbar-brand" href="{% url 'Inicio' %}" style="margin-left: 5px;">Inicio</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'Nosotros' %}">Nosotros</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'Nosotros' %}">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -85,11 +89,25 @@
                               <li><a class="dropdown-item" href="{% url 'ListarResenas' %}">ListarResenas</a></li>
                             </ul>
                         </div>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'VerBD' %}">Ver BD</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'CargarEstilo' %}">Cargar Estilos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'CargarIngredientes' %}">Cargar Novedades</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'ListarIngredientes' %}">Listar Novedades</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'BuscarEstilo' %}">Buscar Estilo</a></li>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Agregar y ver Estilos 
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="{% url 'CargarEstilo' %}">Cargar Estilos</a></li>
+                              <li><a class="dropdown-item" href="{% url 'VerBD' %}">Listar Estilos</a></li>
+                              <li><a class="dropdown-item" href="{% url 'BuscarEstilo' %}">Buscar Estilo</a></li>
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Agregar y ver Novedades 
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="{% url 'CargarIngredientes' %}">Agregar Novedad</a></li>
+                              <li><a class="dropdown-item" href="{% url 'ListarIngredientes' %}">Listar Novedades</a></li>
+                            </ul>
+                        </div>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'Blog' %}">Blog</a></li>
                     </ul>
                 </div>
