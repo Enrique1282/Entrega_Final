@@ -1,8 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
+{% extends "Appfinal/index2.html" %}
+{% load static %}
+
+{% block content %}
+<br>
+
+<h2>{{ mensaje}}</h2>
     <title>Iniciar Sesión</title>
     <style>
+        body{
+            background-color: antiquewhite;
+        }
         #login-form {
             background:linear-gradient(135deg, #9e93e3, #6d5bd7);
             padding: 35px;
@@ -41,4 +48,12 @@
         </form>
     </div>
 </body>
-</html>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+{% endblock %}

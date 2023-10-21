@@ -14,6 +14,13 @@ class EstiloFormulario(forms.Form):
     amargor = forms.CharField()
     descripcion = forms.CharField()
 
+
+class IngredientesForm(forms.Form):
+    malta = forms.CharField()
+    lupulo = forms.CharField()
+    levadura = forms.CharField()
+    descripcion = forms.CharField()
+
 class UserRegisterform(UserCreationForm):
     email = forms.EmailField()
     password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)

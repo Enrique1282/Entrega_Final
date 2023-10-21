@@ -14,11 +14,13 @@ class Estilos(models.Model):
     
 
 class Ingredientes(models.Model):
-    estilo = models.CharField(max_length=40)
+    estilo = models.CharField(max_length=40, blank=True, null=True)
     malta = models.CharField(max_length=40)
     lupulo = models.CharField(max_length=40)
     levadura = models.CharField(max_length=40)
     descripcion = models.TextField(max_length=200)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)  
+    upload_time = models.DateTimeField(auto_now_add=True)  
 
     def __str__(self) -> str:
         return f"Estilo: {self.estilo} -Malta: {self.malta} - Lupulo: {self.lupulo} - Levadura: {self.levadura}"
@@ -41,7 +43,6 @@ class ResenaCerveza(models.Model):
     estilo = models.CharField(max_length=50)
     contenido = models.TextField()
     calificacion = models.FloatField()
-    creado_en = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.titulo}"

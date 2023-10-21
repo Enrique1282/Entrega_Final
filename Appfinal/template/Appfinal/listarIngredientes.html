@@ -3,20 +3,22 @@
 
 {% block content %}
 
-<h1>Lista de Reseñas</h1>
+<h1>Todos los Ingredientes Cargados</h1>
 <ul class="card-list">
-    {% for resena in resenas %}
+    {% for ingrediente in ingredientes %}
       <li class="card">
-        <img src="{% static 'Appfinal/imagenes/sirviendo.jpg' %}" class="card-img" alt="...">
-        <h5 class="card-title">{{ resena.titulo }} - {{ resena.cerveceria }}</h5>
-        <p class="card-text">{{ resena.estilo }}</p>
-        <p class="card-text">{{ resena.contenido }}</p>
-        <p class="card-text">Calificacion: {{ resena.calificacion }}</p>
-        {% if perms.Appfinal.change_resena %}
-          <a href="{% url 'EditarResena' resena.id %}" class="btn-edit">Editar</a>
+        <img src="{% static 'Appfinal/imagenes/ingredientes.jpg' %}" class="card-img" alt="...">
+        <p class="card-text">Malta: {{ ingrediente.malta }}</p>
+        <p class="card-text">Lupulo: {{ ingrediente.lupulo }}</p>
+        <p class="card-text">Levadura: {{ ingrediente.levadura }}</p>
+        <p class="card-text">Descripcion: {{ ingrediente.descripcion }}</p>
+        <p class="card-text">Autor: {{ ingrediente.author }}</p>
+        <p class="card-text">Time: {{ ingrediente.upload_time }}</p>
+        {% if perms.Appfinal.change_ingrediente %}
+          <a href="{% url 'EditarIngrediente' ingrediente.id %}" class="btn-edit">Editar</a>
         {% endif %}
-        {% if perms.Appfinal.delete_resena %}
-          <a onclick="return confirm('¿Estás seguro de que deseas eliminar la reseña?')" href="{% url 'DeleteResena' resena.id  %}" class="btn-delete">Eliminar</a>
+        {% if perms.Appfinal.delete_ingrediente %}
+          <a onclick="return confirm('¿Estás seguro de que deseas eliminar el Ingrediente?')" href="{% url 'DeleteIngrediente' ingrediente.id %}" class="btn-delete">Eliminar</a>
         {% endif %}
       </li>
     {% endfor %}
@@ -72,5 +74,5 @@
             background-color: #c1b9b9;
         }
   </style>
-
+  
 {% endblock %}

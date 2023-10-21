@@ -1,18 +1,18 @@
 from django.shortcuts import render
 from .models import Estilos, Ingredientes, User, Imagen, ResenaCerveza
 from .forms import (BuscaEstilo, EstiloFormulario, MyUserEditForm,
-                     FormularioResenaCerveza, UserRegisterform)
+                     FormularioResenaCerveza, UserRegisterform, IngredientesForm)
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from .models import Categoria, Tema, Mensaje
-from .forms import NuevoMensajeForm,CategoriaForm
+from .forms import NuevoMensajeForm
 
 
 
 def inicio(request):
    
-    return render(request, "Appfinal/index.html")
+    return render(request, "Appfinal/index2.html")
 
 def cargar_estilo(request):
 
@@ -26,18 +26,67 @@ def cargar_estilo(request):
 
     return render(request, "Appfinal/cargar_estilo.html")
 
-
 def cargar_ingredientes(request):
-
     if request.method == 'POST':
-        ingredientes = Ingredientes(estilo=request.POST['estilo'],
-                      malta=request.POST['malta'], lupulo=request.POST['lupulo'],
-                      levadura=request.POST['levadura'], descripcion=request.POST['descripcion'])
+        estilo = request.POST.get('estilo', '')
+        malta = request.POST.get('malta', '')
+        lupulo = request.POST.get('lupulo', '')
+        levadura = request.POST.get('levadura', '')
+        descripcion = request.POST.get('descripcion', '')
+
+        ingredientes = Ingredientes(
+            estilo=estilo,
+            malta=malta,
+            lupulo=lupulo,
+            levadura=levadura,
+            descripcion=descripcion
+        )
         ingredientes.save()
 
         return render(request, "Appfinal/index.html")
 
     return render(request, "Appfinal/cargar_ingredientes.html")
+
+def listar_ingredientes(request):
+
+    ingredientes = Ingredientes.objects.all()  # trae todos los cursos
+
+    contexto = {"ingredientes": ingredientes}
+
+    return render(request, "Appfinal/listarIngredientes.html", contexto)
+
+def delete_ingrediente(request, ingrediente_id):
+
+    ingrediente = Ingredientes.objects.get(id=int(ingrediente_id))
+    ingrediente.delete()
+
+    # vuelvo al menú
+    ingrediente = Ingredientes.objects.all()  # trae todos los cursos
+    return render(request, "Appfinal/listarIngredientes.html", {"ingredientes": ingrediente})
+
+def edit_ingrediente(request, ingrediente_id):
+    if request.method == "POST":
+        # Aqui me llega la informacion del html
+        miFormulario = IngredientesForm(request.POST, request.FILES)
+
+        if miFormulario.is_valid():
+            informacion = miFormulario.cleaned_data
+
+            ingrediente = Ingredientes.objects.get(id=ingrediente_id)
+            ingrediente.malta = informacion["malta"]
+            ingrediente.lupulo = informacion["lupulo"]
+            ingrediente.levadura = informacion["levadura"]
+            ingrediente.descripcion = informacion["descripcion"]
+            ingrediente.save()
+
+            return render(request, "Appfinal/index.html")
+    else:
+        ingrediente = Ingredientes.objects.get(id=ingrediente_id)
+        miFormulario = IngredientesForm(
+            initial={"malta": ingrediente.malta, "lupulo": ingrediente.lupulo, "levadura": ingrediente.levadura,
+                     "descripcion": ingrediente.descripcion})
+
+    return render(request, "Appfinal/editar_estilo.html", {"miFormulario": miFormulario})
 
 def buscar_estilo(request):
     if request.method == "POST":
@@ -136,13 +185,13 @@ def login_request(request):
 
             if user is not None:
                 login(request, user)
-                return render(request, "Appfinal/index.html", {"mensaje": f"Bienvenido {usuario}"})
+                return render(request, "Appfinal/index.html", {"mensaje": f"Bienvenido/a {usuario}"})
             else:
                 form = AuthenticationForm()
                 return render(request, "Appfinal/login2.html", {"mensaje": "Error, datos incorrectos", "form": form})
 
         else:
-            return render(request, "Appfinal/index.html", {"mensaje": "Error, formulario erroneo"})
+            return render(request, "Appfinal/index2.html", {"mensaje": "Usuario o Contraseña incorrecto"})
 
     form = AuthenticationForm()
 
@@ -156,7 +205,7 @@ def registrarse(request):
         if form.is_valid():
             username = form.cleaned_data["username"]
             form.save()
-            return render(request, "Appfinal/index.html", {"mensaje": f"{username} ¡Registro exitoso!"})
+            return render(request, "Appfinal/index2.html", {"mensaje": f"{username} ¡Registro exitoso!\n Ahora puedes iniciar sesión"})
     else:
         # form = UserCreationForm()
         form = UserRegisterform(request.POST)
@@ -234,9 +283,39 @@ def listar_resenas(request):
     resenas = ResenaCerveza.objects.all()  # Recupera todas las reseñas de la base de datos
     return render(request, 'Appfinal/listar_resenas.html', {'resenas': resenas})
 
+def delete_resena(request, resena_id):
 
+    resena = ResenaCerveza.objects.get(id=int(resena_id))
+    resena.delete()
 
+    # vuelvo al menú
+    resena = ResenaCerveza.objects.all()  # trae todos los cursos
+    return render(request, "Appfinal/listar_resenas.html", {"resenas": resena})
 
+def edit_resena(request, resena_id):
+    if request.method == "POST":
+        # Aqui me llega la informacion del html
+        miFormulario = FormularioResenaCerveza(request.POST, request.FILES)
+
+        if miFormulario.is_valid():
+            informacion = miFormulario.cleaned_data
+
+            resena = ResenaCerveza.objects.get(id=resena_id)
+            resena.titulo = informacion["titulo"]
+            resena.cerveceria = informacion["cerveceria"]
+            resena.estilo = informacion["estilo"]
+            resena.contenido = informacion["contenido"]
+            resena.calificacion = informacion["calificacion"]
+            resena.save()
+
+            return render(request, "Appfinal/index.html")
+    else:
+        resena = ResenaCerveza.objects.get(id=resena_id)
+        miFormulario = FormularioResenaCerveza(
+            initial={"titulo": resena.titulo, "cerveceria": resena.cerveceria, "estilo": resena.estilo,
+                     "contenido": resena.contenido, "calificacion": resena.calificacion})
+
+    return render(request, "Appfinal/editarResena.html", {"miFormulario": miFormulario})
 
 def lista_categorias(request):
     categorias = Categoria.objects.all()
@@ -263,31 +342,3 @@ def ver_tema(request, tema_id):
         form = NuevoMensajeForm()
 
     return render(request, 'Appfinal/ver_tema.html', {'tema': tema, 'mensajes': mensajes, 'form': form})
-
-
-def agregar_categoria(request):
-    if request.method == 'POST':
-        form = CategoriaForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return render(request, "Appfinal/index.html")
-    else:
-        form = CategoriaForm()
-    return render(request, 'Appfinal/agregar_categoria.html', {'form': form})
-
-
-
-def agregar_mensaje(request, tema_id):
-    tema = Tema.objects.get(pk=tema_id)
-
-    if request.method == 'POST':
-        form = NuevoMensajeForm(request.POST)
-        if form.is_valid():
-            mensaje = form.save(commit=False)
-            mensaje.tema = tema
-            mensaje.save()
-            return render(request, "Appfinal/index.html")
-    else:
-        form = NuevoMensajeForm()
-
-    return render(request, 'Appfinal/agregar_mensaje.html', {'form': form, 'tema': tema})

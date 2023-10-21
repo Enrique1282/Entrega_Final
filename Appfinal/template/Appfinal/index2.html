@@ -52,47 +52,12 @@
                 <a class="navbar-brand" href="{% url 'Inicio' %}" style="margin-left: 5px;">Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'Nosotros' %}">Nosotros</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Estilos de Cerveza
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="{% url 'Ipa' %}">Ipa</a></li>
-                              <li><a class="dropdown-item" href="{% url 'Apa' %}">Apa</a></li>
-                              <li><a class="dropdown-item" href="{% url 'Scotish' %}">Scotish</a></li>
-                              <li><a class="dropdown-item" href="{% url 'Golden' %}">Golden</a></li>
-                            </ul>
+                    
                         </div>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Recetas 
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="{% url 'RecetaIpa' %}">Receta Ipa</a></li>
-                              <li><a class="dropdown-item" href="{% url 'RecetaPorter' %}">Receta Porter</a></li>
-                              <li><a class="dropdown-item" href="{% url 'RecetaBlonde' %}">Receta Blonde</a></li>
-                            </ul>
-                        </div>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Reseñas 
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="{% url 'AgregarResenaCerveza' %}">AgregarResenaCerveza</a></li>
-                              <li><a class="dropdown-item" href="{% url 'ListarResenas' %}">ListarResenas</a></li>
-                            </ul>
-                        </div>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'VerBD' %}">Ver BD</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'CargarEstilo' %}">Cargar Estilos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'CargarIngredientes' %}">Cargar Novedades</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'ListarIngredientes' %}">Listar Novedades</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'BuscarEstilo' %}">Buscar Estilo</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'Blog' %}">Blog</a></li>
-                    </ul>
-                </div>
+                        
+                        
+                        
+                       </div>
                 {# DROPDOWN PARA LA CUENTA DE USUARIO #}
                 {% if request.user.is_authenticated %}
                 {% if user_avatar %}
@@ -134,11 +99,8 @@
             <!-- Post header-->
             <header class="mb-4 text-center">
               <!-- Post title-->
-              <h1 class="fw-bolder mb-1">Bienvenidos a Cerveceros Artesanales!</h1>
+              <h1 class="fw-bolder mb-1">Bienvenidos a Cerveceros Artesanales! <br><br>Registrarse para acceder</h1>
               <!-- Link -->
-              <a class="badge bg-secondary text-decoration-none link-light" href="{% url 'VerTema' tema_id=4 %}">
-                Deje su Opinión
-              </a>
             </header>
           </div>
                         <!-- Preview image figure-->

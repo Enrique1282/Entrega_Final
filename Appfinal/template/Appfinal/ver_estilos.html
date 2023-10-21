@@ -1,7 +1,15 @@
 {% extends "Appfinal/index.html" %}
 {% load static %}
 
-{% block section1 %}
+{% block content %}
+<style>
+    body{
+      background-color: rgb(155, 153, 144);
+    }
+  </style>
+  <br>
+  <br>
+  
 <h1>Buscar Estilos</h1>
 <form action="" method="POST">
     {% csrf_token %}
