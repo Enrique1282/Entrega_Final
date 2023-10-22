@@ -8,10 +8,10 @@
     <title>Iniciar Sesión</title>
     <style>
         body{
-            background-color: antiquewhite;
+            background-color: rgb(122, 148, 97);
         }
         #login-form {
-            background:linear-gradient(135deg, #9e93e3, #6d5bd7);
+            background:linear-gradient(135deg, #c8bd8d, #dca840);
             padding: 35px;
             border-radius: 50px;
             width: 300px;
@@ -35,6 +35,15 @@
             border-radius: 15px;
             cursor: pointer;
         }
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .button-container input[type="submit"] {
+            width: 100%;
+            max-width: 200px; /* Adjust the maximum width as needed */
+        }
     </style>
 </head>
 <body>
@@ -44,7 +53,9 @@
             {% csrf_token %}
             <input type="text" name="username" placeholder="Usuario" required>
             <input type="password" name="password" placeholder="Contraseña" required>
-            <input type="submit" value="Iniciar Sesión">
+            <div class="button-container">
+                <input type="submit" value="Iniciar Sesión">
+              </div>
         </form>
     </div>
 </body>

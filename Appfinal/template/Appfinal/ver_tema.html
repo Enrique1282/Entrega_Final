@@ -15,13 +15,13 @@
       background-color: khaki;
     }
     </style>
-{% for mensaje in mensajes %}
-<div class="alert alert-dark" role="alert">
 
-  <p>{{ forloop.counter }}. {{ mensaje.contenido }} </p>
-  <p>- Autor: {{ mensaje.autor}}/{{mensaje.fecha_creacion}}</p>
+{% for mensaje in mensajes %}
+
+  <p><strong style="font-size: 1.1em;">{{ forloop.counter }}.  {{ mensaje.contenido }} </strong></p>
+  <p>- Autor: {{ mensaje.autor}}/{{mensaje.fecha_creacion}}</p><br>
 {% endfor %}
-</div>
+
 
 <form method="post">
   {% csrf_token %}

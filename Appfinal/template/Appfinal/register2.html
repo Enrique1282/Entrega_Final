@@ -11,7 +11,7 @@
       
     <style>
         body{
-            background-color: antiquewhite;
+            background-color: rgb(122, 148, 97);
             font-family: Arial, sans-serif;
         }
         
@@ -48,13 +48,25 @@
         .error-message {
             color: #f00;
         }
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .button-container input[type="submit"] {
+            width: 100%;
+            max-width: 200px; /* Adjust the maximum width as needed */
+        }
     </style>
 </head>
 <body>
     <form id="registro-form" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Registrar">
+        <div class="button-container">
+            <input type="submit" value="Registrarse">
+          </div>
+          
     </form>
 
     <!-- Mensajes de error -->

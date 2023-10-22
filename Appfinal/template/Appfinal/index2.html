@@ -95,12 +95,16 @@
             }
         </style>
         <!-- Page content-->
-        <div class="col-lg-8 ">
+        <div class="col-lg-8">
             <!-- Post header-->
             <header class="mb-4 text-center">
               <!-- Post title-->
               <h1 class="fw-bolder mb-1">Bienvenidos a Cerveceros Artesanales! <br><br>Registrarse para acceder</h1>
-              <!-- Link -->
+              <!-- Buttons -->
+              <div class="text-center">
+                <a href="{% url 'Login' %}" class="btn btn-primary">Iniciar sesión</a>
+                <a href="{% url 'Registrarse' %}" class="btn btn-secondary">Registrarse</a>
+              </div>
             </header>
           </div>
                         <!-- Preview image figure-->

@@ -6,11 +6,31 @@
     body{
         background-color: antiquewhite ;
     }
+    .message-container {
+  text-align: center;
+}
+
+.button {
+  display: inline-block;
+  background-color: #1100ff;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.button:hover {
+  background-color: #10a0e7;
+}
 </style>
 <br>
 <br>
 <br>
-<h2>Sesión cerrada...</h2>
+<div class="message-container">
+    <h2>Sesión cerrada...</h2><br><br>
+    <a href="{% url 'Inicio' %}" class="button">Volver al inicio</a>
+  </div>
 <br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br>
 {% endblock %}
