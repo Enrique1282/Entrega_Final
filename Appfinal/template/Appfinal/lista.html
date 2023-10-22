@@ -18,6 +18,7 @@
         <li>Nombre: {{ estilo.nombre }} </li>
         <li>Color: {{ estilo.color }} </li>
         <li>Amargor: {{ estilo.amargor }} </li>
+        <li>Descripcion: {{ estilo.descripcion }} </li>
         <br>
     {% endfor %}
     <form action="{% url 'BuscarEstilo' %}" method="GET">

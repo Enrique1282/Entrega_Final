@@ -72,6 +72,8 @@ class Mensaje(models.Model):
     contenido = models.TextField()
     autor = models.CharField(max_length=100)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
+    likes = models.PositiveIntegerField(default=0, blank=True, null=True)
 
     def __str__(self):
         return f"{self.tema}-{self.contenido}"
+    

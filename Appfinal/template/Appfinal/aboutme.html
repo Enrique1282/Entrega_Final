@@ -1,0 +1,69 @@
+{% extends "Appfinal/index.html" %}
+{% load static %}
+
+{% block content %}
+
+<head>
+  <style>
+    body{
+      background-color: rgb(51, 63, 77);
+    }
+      .rounded-image {
+          border-radius: 50%;
+          border: 2px solid black;
+          padding: 5px;
+      }
+      .rounded-image {
+        border-radius: 50%;
+        border: 2px solid black;
+        padding: 5px;
+        width: 130px; 
+        height: auto;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rounded-image {
+  display: block;
+  margin: 0 auto;
+}
+      
+  </style>
+  <title>Nosotros</title>
+  <body>
+    <br><br><br>
+    <div class="d-flex ">
+    <div class="card" style="flex: 1; margin-right: 1rem; background-color: rgb(172, 166, 105); border-radius: 10px;">
+      <img class="rounded-image" src="{% static 'Appfinal\imagenes\foto_cv_mejorada.jpeg'%}" alt="Imagen con marco redondeado">
+      <div class="card-body">
+        <h2 style="text-align: center;"> Enrique Ibarra</h2><br>
+        <p>Tengo una fabrica de cerveza y Soy un entusiasta de la programación que ha decidido embarcarse en este proyecto porque considero que es muy enriquecedor. Me apasiona aprender nuevos lenguajes y tecnologías, y estar al tanto de las últimas tendencias en el campo de la programación.</p>
+      </div>
+    </div>
+    <div class="card" style="flex: 1; margin-right: 1rem; background-color:  rgb(172, 166, 105); border-radius: 10px;">
+      <img class="rounded-image" src="{% static 'Appfinal\imagenes\foto_flo.jpeg'%}" alt="Imagen con marco redondeado">
+      <div class="card-body">
+        <h2 style="text-align: center;"> Florencia Jaimes</h2><br>
+        <p> Me inscribí particularmente en este curso porque leí que en la programacion existen diferentes lenguajes y como Técnica en traducción de Inglés, me gustan los idiomas, porque no prender uno de programación?.</p>
+      </div>
+    </div>
+    <div class="card" style="flex: 1; background-color:  rgb(172, 166, 105); border-radius: 10px;">
+      <img class="rounded-image" src="{% static 'Appfinal\imagenes\lu.jpeg'%}" alt="Imagen con marco redondeado">
+      <div class="card-body">
+        <h2 style="text-align: center;"> Luciana Vega</h2><br>
+        <p> Decidí emprender este proyecto de programación porque quiero mejorar mis habilidades y conocimientos, así como compartir mi experiencia con otros programadores. Creo que la programación es una habilidad muy valiosa en el mundo actual y puede abrir muchas puertas en términos de oportunidades profesionales.</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+{% endblock %}

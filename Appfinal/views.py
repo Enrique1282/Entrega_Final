@@ -13,10 +13,15 @@ from .forms import NuevoMensajeForm
 def inicio(request):
    
     return render(request, "Appfinal/index2.html")
-
+@login_required
 def inicio2(request):
    
     return render(request, "Appfinal/index.html")
+
+@login_required
+def about(request):
+   
+    return render(request, "Appfinal/aboutme.html")
 
 @login_required
 def cargar_estilo(request):
@@ -312,7 +317,6 @@ def agregar_resena_cerveza(request):
 def listar_resenas(request):
     resenas = ResenaCerveza.objects.all()  # Recupera todas las reseñas de la base de datos
     return render(request, 'Appfinal/listar_resenas.html', {'resenas': resenas})
-
 
 def delete_resena(request, resena_id):
 
